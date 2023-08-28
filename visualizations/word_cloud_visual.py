@@ -2,7 +2,6 @@ from data_preprocessing import DataProcessor
 import matplotlib.pyplot as plt
 import numpy as np
 from wordcloud import WordCloud
-import PIL.Image
 
 class WordCloudVisualizer:
     def __init__(self, text):
