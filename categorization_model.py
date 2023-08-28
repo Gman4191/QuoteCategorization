@@ -4,8 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import SelectKBest, chi2
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import ComplementNB
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from imblearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
@@ -67,13 +66,13 @@ class QuoteClassificationModel:
         print("F1-Score:", f1)
 
         # Create a confusion matrix
-        # conf_matrix = confusion_matrix(labels_test, labels_prediction, labels=unique_labels)
-        # plt.figure(figsize=(12, 8))
-        # sns.heatmap(conf_matrix, annot=False, fmt="d", cmap="Blues", xticklabels=unique_labels, yticklabels=unique_labels)
-        # plt.xlabel("Predicted")
-        # plt.ylabel("Actual")
-        # plt.title("Confusion Matrix")
-        # plt.show()
+        conf_matrix = confusion_matrix(labels_test, labels_prediction, labels=unique_labels)
+        plt.figure(figsize=(12, 8))
+        sns.heatmap(conf_matrix, annot=False, fmt="d", cmap="Blues", xticklabels=unique_labels, yticklabels=unique_labels)
+        plt.xlabel("Predicted")
+        plt.ylabel("Actual")
+        plt.title("Confusion Matrix")
+        plt.show()
         return grid_search.best_estimator_
 
 # Example

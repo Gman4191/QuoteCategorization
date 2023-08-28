@@ -4,7 +4,6 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import spacy
 
 nltk.download("stopwords")
 
@@ -17,9 +16,6 @@ class DataProcessor:
         self.stop_words = ' '.join(self.stop_words)
         self.stop_words = re.sub(r'[^a-zA-Z0-9\s]', ' ', self.stop_words) 
         self.stop_words = self.stop_words.split()
-        
-        # Initialize lemmatization model
-        # self.nlp = spacy.load("en_core_web_sm")
     
     def format_csv(self, filePath, columnsToRemove=[]):
         # Open the csv
@@ -59,27 +55,6 @@ class DataProcessor:
         clean_words = []
         for word in words:
             if word not in self.stop_words:
-                # Lemmatize using spaCy
-                # lemma = self.nlp(word)[0].lemma_
                 clean_words.append(word)
 
         return ' '.join(clean_words)
-
-# data_processor = DataProcessor()
-# df = data_processor.format_csv('data/data_2.csv')
-
-
-# counts = {category : 0 for category in df['Category']}
-# for category in df['Category']:
-#     counts[category] += 1
-    
-# print(len(set(df['Category'])))
-
-# for category in set(df['Category']):
-#     print(category, "|", counts[category])
-
-
-
-# processed_df = data_processor.process_data(df.head(10))
-# for i in range(len(processed_df['quote'])):
-#     print(processed_df['quote'][i], " | ", processed_df['category'][i])
