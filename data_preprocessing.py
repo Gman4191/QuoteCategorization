@@ -6,6 +6,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 nltk.download("stopwords")
+nltk.download("punkt")
 
 class DataProcessor:
     def __init__(self) -> None:
