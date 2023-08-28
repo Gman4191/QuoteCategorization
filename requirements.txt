@@ -4,7 +4,6 @@ scikit-learn
 seaborn
 imblearn
 nltk
-re
 pandas
 numpy
 wordcloud
