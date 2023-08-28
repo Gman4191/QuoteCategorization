@@ -14,22 +14,22 @@ class WordCloudVisualizer:
 
         for quote in df['quote']:
             quote_list = quote.split()
-            print(quote_list)
             for word in self.features:
                 self.frequencies[word] += quote_list.count(word)
-        print(self.frequencies)
 
     def get_chart(self):
-
+         
         plt.figure(figsize=(8, 3))
         if self.features:
-            word_cloud_mask = PIL.Image.open('../static/word_cloud_mask.png')
             word_cloud = WordCloud(width=800, height=400, 
                                    background_color='white', contour_color='black',
-                                   contour_width=3,
-                                   mask=word_cloud_mask).generate_from_frequencies(self.frequencies)
-
+                                   contour_width=3).generate_from_frequencies(self.frequencies)
+            word_cloud.recolor(color_func=monochromatic_color_func)
             plt.imshow(word_cloud, interpolation='bilinear')
             plt.axis('off')
 
         return plt
+    
+# Set a monochromatic color function (all words will be the same color)
+def monochromatic_color_func(word, font_size, position, orientation, random_state=None, **kwargs):
+    return 'green'

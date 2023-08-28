@@ -15,7 +15,8 @@ class FeatureImportanceChart:
             self.importances.append(np.abs(baseline_probability - modified_probability))
         
         total_importance = np.sum(self.importances)
-        self.importances = [importance / total_importance * 100.0 for importance in self.importances]
+        if total_importance > 0.0:
+            self.importances = [importance / total_importance * 100.0 for importance in self.importances]
 
     def get_chart(self):
         plt.figure(figsize=(10, 6))

@@ -6,6 +6,8 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import spacy
 
+nltk.download("stopwords")
+
 class DataProcessor:
     def __init__(self) -> None:
         # Initialize stop words
