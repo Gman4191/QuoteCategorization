@@ -1,4 +1,3 @@
-from data_preprocessing import DataProcessor
 from sklearn.preprocessing import MaxAbsScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import SelectKBest, chi2
@@ -9,13 +8,28 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from imblearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle
 
 class QuoteClassificationModel:
     def __init__(self) -> None:
+        """
+        Initialize a QuoteClassificationModel object.
+
+        This class represents a machine learning model for classifying inspirational quotes into categories.
+        """
+
         self.k = 100
 
     def train_and_evaluate(self, processed_df):
+        """
+        Train and evaluate the classification model.
+
+        Parameters:
+        - processed_df (DataFrame): A DataFrame containing processed quote data with 'quote' and 'category' columns.
+
+        Returns:
+        - best_estimator (sklearn.pipeline.Pipeline): The best-trained model estimator.
+        """
+
         pipeline = Pipeline([
             ['vectorizer', TfidfVectorizer()],
             ['select_k_best', SelectKBest()],
@@ -74,14 +88,3 @@ class QuoteClassificationModel:
         plt.title("Confusion Matrix")
         plt.show()
         return grid_search.best_estimator_
-
-# Example
-data_processor = DataProcessor()
-df = data_processor.format_csv('data/inspiration.csv')
-model = QuoteClassificationModel()
-processed_df = data_processor.process_data(df)
-best_model = model.train_and_evaluate(processed_df)
-print(best_model)
-
-with open('models/trained_model.pkl', 'wb') as model_file:
-    pickle.dump(best_model, model_file)
